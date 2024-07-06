@@ -7,4 +7,3 @@ return {
     { '<Leader>pn', ':PhpactorClassNew<CR>' },
   }
 }
-

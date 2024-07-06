@@ -8,11 +8,11 @@ vim.g.maplocalleader = ' '
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.keymap.set('i', ';;', '<End>;', { silent = true })
-vim.keymap.set('i', ',,', '<End>,', { silent = true })
+-- vim.keymap.set('i', ';;', '<End>;', { silent = true })
+-- vim.keymap.set('i', ',,', '<End>,', { silent = true })
 vim.keymap.set('n', ';;', 'A;<Esc>', { silent = true })
 vim.keymap.set('n', ',,', 'A,<Esc>', { silent = true })
-vim.keymap.set('n', '<CR>', 'o<Esc>', { silent = true })
+-- vim.keymap.set('n', '<CR>', 'o<Esc>', { silent = true }) -- This will break the <CR> key in location lists and quickfix lists
 vim.keymap.set('i', 'jj', '<Esc>', { silent = true })
 vim.keymap.set('n', '<Leader>w', ':w!<cr>', { silent = true })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { silent = true })
@@ -29,3 +29,7 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 vim.keymap.set('v', 'p', '"_dP', { silent = true })
+
+-- Clear the quickfix list
+vim.keymap.set('n', '<leader>qc', '<cmd>call setqflist([])<CR>', { noremap = true, silent = true })
+

@@ -16,6 +16,8 @@ return {
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
 
+    require('luasnip/loaders/from_snipmate').lazy_load()
+
     -- stop cmp and luasnip from making the curson jump around
     luasnip.config.set_config({
       region_check_events = 'InsertEnter',

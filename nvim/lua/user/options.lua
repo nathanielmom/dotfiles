@@ -5,6 +5,7 @@
 vim.opt.title = true
 
 -- Make command line visible only when typing a command
+-- Note that you will not see the command line when you are in normal mode, meaning things like macro recording status will not be visible
 vim.opt.cmdheight = 0
 
 -- Use spaces instead of tabs

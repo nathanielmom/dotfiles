@@ -38,6 +38,9 @@ require("lazy").setup({
     { 'tpope/vim-fugitive'},
     { 'tpope/vim-rhubarb'},
 
+    --- Floating terminal.
+    { import = 'user.plugins.floaterm' },
+
     -- Detect tabstop and shiftwidth automatically
     { 'tpope/vim-sleuth' },
 
