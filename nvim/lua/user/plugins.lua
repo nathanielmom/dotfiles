@@ -9,12 +9,13 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   })
 end
+
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 
     -- Colorscheme
-    { import = 'user.plugins.gruvbox'},
+    { import = 'user.plugins.' .. vim.env.THEME },
 
     -- Add, change, and delete surrounding text.
     { 'tpope/vim-surround' },
