@@ -11,7 +11,6 @@ return {
   config = function()
     vim.cmd([[
       let test#php#phpunit#executable = 'vendor/bin/phpunit'
-      let test#php#phpunit#options = '--colors=always'
 
       function! FloatermStrategy(cmd)
         execute 'silent FloatermSend q'
