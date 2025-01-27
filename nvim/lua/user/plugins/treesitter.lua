@@ -61,8 +61,8 @@ return {
         lookahead = true,
         keymaps = {
          -- You can use the capture groups defined in textobjects.scm
-         ['aa'] = '@parameter.outer', -- vaa, daa, caa
-         ['ia'] = '@parameter.inner',
+         ['aa'] = '@parameter.outer', -- vaa, daa, caa (e.g. daa will delete the whole parameter, including the comma)
+         ['ia'] = '@parameter.inner', -- via, dia, cia (e.g. dia will delete only the parameter, leaving the comma)
          ['af'] = '@function.outer',  -- vaf, daf, caf
          ['if'] = '@function.inner',
          ['ac'] = '@class.outer',
