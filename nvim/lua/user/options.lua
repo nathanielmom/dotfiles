@@ -74,3 +74,19 @@ vim.opt.listchars = { tab = '▸ ', trail = '·' }
 
 -- Enable spell check
 vim.opt.spell = true
+
+-- Keep cursor in the middle of the screen when scrolling
+vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 8
+
+-- Block cursor in all modes
+vim.opt.guicursor = {
+    "n-v-c:block-Cursor/lCursor",
+    "i:block-CursorInsert/lCursorInsert",
+    "r-cr-o:hor20-CursorReplace/lCursorReplace",
+}
+
+-- Change block cursor color
+vim.api.nvim_set_hl(0, "Cursor", { fg = "white", bg = "yellow" })
+vim.api.nvim_set_hl(0, "CursorInsert", { fg = "white", bg = "magenta" })
+vim.api.nvim_set_hl(0, "CursorReplace", { fg = "white", bg = "magenta" })
