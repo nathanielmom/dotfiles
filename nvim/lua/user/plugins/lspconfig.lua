@@ -9,6 +9,7 @@ return {
     { 'j-hui/fidget.nvim',               tag = 'legacy' },
     { 'nvimtools/none-ls.nvim', dependencies = 'nvim-lua/plenary.nvim' },
     'jayp0521/mason-null-ls.nvim',
+    'nvimtools/none-ls-extras.nvim',
   },
   config = function()
     -- LSP settings.
@@ -140,6 +141,7 @@ return {
     null_ls.setup({
       temp_dir = '/tmp',
       sources = {
+        require("none-ls.diagnostics.eslint"), -- requires none-ls-extras.nvim
         -- null_ls.builtins.diagnostics.eslint_d.with({
         --   condition = function(utils)
         --     return utils.root_has_file({ '.eslintrc.js' })

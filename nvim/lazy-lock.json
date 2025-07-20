@@ -83,6 +83,7 @@
   "neo-tree.nvim": { "branch": "main", "commit": "73d63376352ac731379892e27ac7b3d9449148e3" },
   "neoscroll.nvim": { "branch": "master", "commit": "f957373912e88579e26fdaea4735450ff2ef5c9c" },
 <<<<<<< HEAD
+<<<<<<< HEAD
   "nui.nvim": { "branch": "main", "commit": "53e907ffe5eedebdca1cd503b00aa8692068ca46" },
 ||||||| parent of a3495f9 (Change tsserver to ts_ls in lspconfig)
   "mason.nvim": { "branch": "main", "commit": "0950b15060067f752fde13a779a994f59516ce3d" },
@@ -161,6 +162,10 @@
   "phpactor": { "branch": "master", "commit": "cc28b51f3dc594523e07afa4344c0096fb81480d" },
 >>>>>>> origin/main
 =======
+||||||| parent of b0f84ae (add none-ls-extras)
+=======
+  "none-ls-extras.nvim": { "branch": "main", "commit": "1214d729e3408470a7b7a428415a395e5389c13c" },
+>>>>>>> b0f84ae (add none-ls-extras)
   "none-ls.nvim": { "branch": "main", "commit": "a117163db44c256d53c3be8717f3e1a2a28e6299" },
   "nui.nvim": { "branch": "main", "commit": "8d3bce9764e627b62b07424e0df77f680d47ffdb" },
   "nvim-autopairs": { "branch": "master", "commit": "84a81a7d1f28b381b32acf1e8fe5ff5bef4f7968" },
