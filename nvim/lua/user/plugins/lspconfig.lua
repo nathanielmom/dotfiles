@@ -7,7 +7,7 @@ return {
     'hrsh7th/cmp-nvim-lsp',
     'b0o/schemastore.nvim',
     { 'j-hui/fidget.nvim',               tag = 'legacy' },
-    { 'jose-elias-alvarez/null-ls.nvim', dependencies = 'nvim-lua/plenary.nvim' },
+    { 'nvimtools/none-ls.nvim', dependencies = 'nvim-lua/plenary.nvim' },
     'jayp0521/mason-null-ls.nvim',
   },
   config = function()
@@ -140,18 +140,18 @@ return {
     null_ls.setup({
       temp_dir = '/tmp',
       sources = {
-        null_ls.builtins.diagnostics.eslint_d.with({
-          condition = function(utils)
-            return utils.root_has_file({ '.eslintrc.js' })
-          end,
-        }),
+        -- null_ls.builtins.diagnostics.eslint_d.with({
+        --   condition = function(utils)
+        --     return utils.root_has_file({ '.eslintrc.js' })
+        --   end,
+        -- }),
         -- null_ls.builtins.diagnostics.phpstan, -- TODO: Only if config file
         null_ls.builtins.diagnostics.trail_space.with({ disabled_filetypes = { 'NvimTree' } }),
-        null_ls.builtins.formatting.eslint_d.with({
-          condition = function(utils)
-            return utils.root_has_file({ '.eslintrc.js', '.eslintrc.json' })
-          end,
-        }),
+        -- null_ls.builtins.formatting.eslint_d.with({
+        --   condition = function(utils)
+        --     return utils.root_has_file({ '.eslintrc.js', '.eslintrc.json' })
+        --   end,
+        -- }),
         null_ls.builtins.formatting.pint.with({
           condition = function(utils)
             return utils.root_has_file({ 'vendor/bin/pint' })
