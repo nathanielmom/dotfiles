@@ -6,19 +6,16 @@ return {
     'williamboman/mason-lspconfig.nvim',
     'hrsh7th/cmp-nvim-lsp',
     'b0o/schemastore.nvim',
-    { 'j-hui/fidget.nvim',               tag = 'legacy' },
-    { 'nvimtools/none-ls.nvim', dependencies = 'nvim-lua/plenary.nvim' },
-    'jayp0521/mason-null-ls.nvim',
-    'nvimtools/none-ls-extras.nvim',
+    { 'j-hui/fidget.nvim', tag = 'legacy' },
+    -- { 'nvimtools/none-ls.nvim', dependencies = 'nvim-lua/plenary.nvim' },
+    -- 'jayp0521/mason-null-ls.nvim',
+    -- 'nvimtools/none-ls-extras.nvim',
   },
   config = function()
     -- LSP settings.
     --  This function gets run when an LS connects to a particular buffer.
     local on_attach = function(_, bufnr)
-      -- NOTE: Remember that lua is a real programming language, and as such it is possible
-      -- to define small helper and utility functions so you don't have to repeat yourself
-      -- many times.
-      --
+
       -- In this case, we create a function that lets us more easily define mappings specific
       -- for LSP related items. It sets the mode, buffer and description for us each time.
       local nmap = function(keys, func, desc)
@@ -52,9 +49,13 @@ return {
       end, '[W]orkspace [L]ist Folders')
 
       -- Create a command `:Format` local to the LSP buffer
-      vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-        vim.lsp.buf.format()
-      end, { desc = 'Format current buffer with LSP' })
+      vim.api.nvim_buf_create_user_command(
+        bufnr,
+        'Format',
+        function(_)
+          vim.lsp.buf.format()
+        end,
+        { desc = 'Format current buffer with LSP' })
     end
 
     -- Enable the following language servers
@@ -63,28 +64,15 @@ return {
     --  Add any additional override configuration in the following tables. They will be passed to
     --  the `settings` field of the server config. You must look up that documentation yourself.
     local servers = {
-      -- clangd = {},
-      -- gopls = {},
-      -- pyright = {},
-      -- rust_analyzer = {},
-      ts_ls = {},
-      lua_ls = {
-        Lua = {
-          workspace = { checkThirdParty = false },
-          telemetry = { enable = false },
-          diagnostics = {
-            globals = { 'vim' }
-          }
-        },
-      },
-      intelephense = {},
-      tailwindcss = {},
-      jsonls = {
-        json = {
-          schemas = require('schemastore').json.schemas(),
-        },
-      },
-      emmet_language_server = {},
+      -- "clangd" ,
+      -- "gopls",
+      -- "pyright",
+      -- "rust_analyzer",
+      "ts_ls",
+      "lua_ls",
+      "tailwindcss",
+      "jsonls",
+      "emmet_language_server",
     }
 
     -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
@@ -98,30 +86,92 @@ return {
     local mason_lspconfig = require('mason-lspconfig')
 
     mason_lspconfig.setup({
-      ensure_installed = vim.tbl_keys(servers),
-    })
-
-    mason_lspconfig.setup({
+      -- Disabling automatic_enable because mason-lspconfig causes nvim-lspconfig's on_attach function to not load at all
+      automatic_enable = false, -- or create a exclude table
+      ensure_installed = servers,
+      -- if automatic_enable is true, the handlers will be used to configure the LSPs
       handlers = {
-        function(server_name)
-          require('lspconfig')[server_name].setup {
-            capabilities = capabilities,
-            on_attach = on_attach,
-            settings = servers[server_name],
-          }
-        end,
+        -- ["lua_ls"] = function()
+        --   require("lspconfig").lua_ls.setup({
+        --     on_attach = on_attach,
+        --     capabilities = capabilities,
+        --     settings = {
+        --       Lua = {
+        --         workspace = { checkThirdParty = false },
+        --         telemetry = { enable = false },
+        --         diagnostics = {
+        --           globals = { 'vim' }
+        --         }
+        --       },
+        --     },
+        --   })
+        -- end,
+        -- ["json_ls"] = function()
+        --   require("lspconfig").json_ls.setup({
+        --     on_attach = on_attach,
+        --     capabilities = capabilities,
+        --     settings = {
+        --       json = {
+        --         schemas = require('schemastore').json.schemas(),
+        --       },
+        --     },
+        --   })
+        -- end,
       }
     })
 
-    -- Diagnostic keymaps
-    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {desc = "Go to previous diagnostic"})
-    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {desc = "Go to next diagnostic"})
-    vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, {desc = "Open diagnostic float"})
-    vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, {desc = "Set diagnostic loclist"})
-
-    require('lspconfig').dartls.setup({
-      capabilities = capabilities,
+    require("lspconfig").tailwindcss.setup({
       on_attach = on_attach,
+      capabilities = capabilities,
+    })
+
+    require("lspconfig").json_ls.setup({
+      on_attach = on_attach,
+      capabilities = capabilities,
+      settings = {
+        json = {
+          schemas = require('schemastore').json.schemas(),
+        },
+      },
+    })
+
+    require("lspconfig").lua_ls.setup({
+      on_attach = on_attach,
+      capabilities = capabilities,
+      settings = {
+        Lua = {
+          workspace = { checkThirdParty = false },
+          telemetry = { enable = false },
+          diagnostics = {
+            globals = { 'vim' }
+          }
+        },
+      },
+    })
+
+    require('lspconfig').emmet_language_server.setup({
+      on_attach = on_attach,
+      capabilities = capabilities,
+      filetypes = { 'html', 'blade' },
+    })
+
+    -- PHP
+    require('lspconfig').intelephense.setup({
+      commands = {
+        IntelephenseIndex = {
+          function()
+            vim.lsp.buf.execute_command({ command = 'intelephense.index.workspace' })
+          end,
+        },
+      },
+      on_attach = on_attach,
+      capabilities = capabilities,
+    })
+
+    -- dartls
+    require("lspconfig").dartls.setup({
+      on_attach = on_attach,
+      capabilities = capabilities,
       settings = {
         dart = {
           analysisExcludedFolders = {
@@ -133,62 +183,17 @@ return {
       cmd = { "dart", 'language-server', '--protocol=lsp' },
     })
 
-
     -- Turn on lsp status information
     require('fidget').setup()
 
-    -- null-ls
-    local null_ls = require('null-ls')
-    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-    null_ls.setup({
-      temp_dir = '/tmp',
-      sources = {
-        require("none-ls.diagnostics.eslint"), -- requires none-ls-extras.nvim
-        -- null_ls.builtins.diagnostics.eslint_d.with({
-        --   condition = function(utils)
-        --     return utils.root_has_file({ '.eslintrc.js' })
-        --   end,
-        -- }),
-        -- null_ls.builtins.diagnostics.phpstan, -- TODO: Only if config file
-        null_ls.builtins.diagnostics.trail_space.with({ disabled_filetypes = { 'NvimTree' } }),
-        -- null_ls.builtins.formatting.eslint_d.with({
-        --   condition = function(utils)
-        --     return utils.root_has_file({ '.eslintrc.js', '.eslintrc.json' })
-        --   end,
-        -- }),
-        null_ls.builtins.formatting.pint.with({
-          condition = function(utils)
-            return utils.root_has_file({ 'vendor/bin/pint' })
-          end,
-        }),
-        null_ls.builtins.formatting.prettier.with({
-          filetypes = { "html", "json", "yaml", "markdown", "blade" },
-          condition = function(utils)
-            return utils.root_has_file({ '.prettierrc', '.prettierrc.json', '.prettierrc.yml', '.prettierrc.js',
-              'prettier.config.js' })
-          end,
-        }),
-      },
-      -- null_ls.builtins.formatting.blade_formatter,
-      -- on_attach = function(client, bufnr)
-      --   if client.supports_method("textDocument/formatting") then
-      --     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-      --     vim.api.nvim_create_autocmd("BufWritePre", {
-      --       group = augroup,
-      --       buffer = bufnr,
-      --       callback = function()
-      --         vim.lsp.buf.format({ bufnr = bufnr, timeout_ms = 5000 })
-      --       end,
-      --     })
-      --   end
-      -- end,
-    })
+    -- require('lspconfig').emmet_language_server.setup({
+    --   filetypes = { 'html', 'blade'},
+    -- })
 
-    require('mason-null-ls').setup({ automatic_installation = true })
-
-    require('lspconfig').emmet_language_server.setup({
-      filetypes = { 'html', 'blade'},
-    })
-
+    -- Diagnostic keymaps
+    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {desc = "Go to previous diagnostic"})
+    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {desc = "Go to next diagnostic"})
+    vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, {desc = "Open diagnostic float"})
+    vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, {desc = "Set diagnostic loclist"})
   end
 }
