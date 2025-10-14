@@ -120,12 +120,12 @@ return {
       }
     })
 
-    require("lspconfig").tailwindcss.setup({
+    vim.lsp.config('tailwindcss',{
       on_attach = on_attach,
       capabilities = capabilities,
     })
 
-    require("lspconfig").json_ls.setup({
+    vim.lsp.config('json_ls',{
       on_attach = on_attach,
       capabilities = capabilities,
       settings = {
@@ -135,7 +135,7 @@ return {
       },
     })
 
-    require("lspconfig").lua_ls.setup({
+    vim.lsp.config('lua_ls',{
       on_attach = on_attach,
       capabilities = capabilities,
       settings = {
@@ -149,14 +149,14 @@ return {
       },
     })
 
-    require('lspconfig').emmet_language_server.setup({
+    vim.lsp.config('emmet_language_server',{
       on_attach = on_attach,
       capabilities = capabilities,
       filetypes = { 'html', 'blade' },
     })
 
     -- PHP
-    require('lspconfig').intelephense.setup({
+    vim.lsp.config('intelephense',{
       commands = {
         IntelephenseIndex = {
           function()
@@ -169,7 +169,7 @@ return {
     })
 
     -- dartls
-    require("lspconfig").dartls.setup({
+    vim.lsp.config('dartls',{
       on_attach = on_attach,
       capabilities = capabilities,
       settings = {

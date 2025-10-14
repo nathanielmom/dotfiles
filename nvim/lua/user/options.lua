@@ -48,7 +48,7 @@ vim.opt.breakindent = true
 -- Save undo history
 vim.opt.undofile = true
 
--- Case insensitive searching UNLESS /C or capital in search
+-- Case insensitive searching UNLESS you prefix the target word with \C e.g.:%s/\Cname/title/g
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
