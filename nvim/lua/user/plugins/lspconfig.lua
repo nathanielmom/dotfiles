@@ -64,7 +64,7 @@ return {
     --  Add any additional override configuration in the following tables. They will be passed to
     --  the `settings` field of the server config. You must look up that documentation yourself.
     local servers = {
-      -- "clangd" ,
+      "clangd" ,
       -- "gopls",
       -- "pyright",
       -- "rust_analyzer",
@@ -120,10 +120,19 @@ return {
       }
     })
 
+    vim.lsp.config('clangd',{
+      on_attach = on_attach,
+      capabilities = capabilities,
+    })
+
+    vim.lsp.enable('clangd')
+
     vim.lsp.config('tailwindcss',{
       on_attach = on_attach,
       capabilities = capabilities,
     })
+
+    vim.lsp.enable('tailwindcss')
 
     vim.lsp.config('json_ls',{
       on_attach = on_attach,
@@ -134,6 +143,8 @@ return {
         },
       },
     })
+
+    vim.lsp.enable('json_ls')
 
     vim.lsp.config('lua_ls',{
       on_attach = on_attach,
@@ -149,11 +160,15 @@ return {
       },
     })
 
+    vim.lsp.enable('lua_ls')
+
     vim.lsp.config('emmet_language_server',{
       on_attach = on_attach,
       capabilities = capabilities,
       filetypes = { 'html', 'blade' },
     })
+
+    vim.lsp.enable('emmet_language_server')
 
     -- PHP
     vim.lsp.config('intelephense',{
@@ -167,6 +182,8 @@ return {
       on_attach = on_attach,
       capabilities = capabilities,
     })
+
+    vim.lsp.enable('intelephense')
 
     -- dartls
     vim.lsp.config('dartls',{
@@ -182,6 +199,8 @@ return {
       },
       cmd = { "dart", 'language-server', '--protocol=lsp' },
     })
+
+    vim.lsp.enable('dartls')
 
     -- Turn on lsp status information
     require('fidget').setup()
