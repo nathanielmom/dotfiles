@@ -30,6 +30,9 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 
 vim.keymap.set('v', 'p', '"_dP', { silent = true })
 
+-- Clear search highlights (fallback if hlsearch is ever enabled)
+vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>', { silent = true })
+
 -- Clear the quickfix list
 vim.keymap.set('n', '<leader>qc', '<cmd>call setqflist([])<CR>', { noremap = true, silent = true })
 

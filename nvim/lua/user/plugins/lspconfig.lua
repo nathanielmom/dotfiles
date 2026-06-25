@@ -73,6 +73,8 @@ return {
       "tailwindcss",
       "jsonls",
       "emmet_language_server",
+      "intelephense",
+      -- dartls is NOT installed via mason — it uses the Dart SDK binary directly (cmd = {"dart", "language-server"})
     }
 
     -- nvim-cmp supports additional completion capabilities, so broadcast that to servers

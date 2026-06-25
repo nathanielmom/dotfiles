@@ -63,12 +63,6 @@ vim.opt.background = "dark" -- or "light" for light mode
 -- Set completeopt to have a better completion experience
 vim.opt.completeopt = 'menuone,noselect'
 
--- Ignore case when searching
-vim.opt.ignorecase = true
-
--- When searching try to be smart about cases
-vim.opt.smartcase = true
-
 vim.opt.list = true -- enable this listchars below
 vim.opt.listchars = { tab = '▸ ', trail = '·' }
 

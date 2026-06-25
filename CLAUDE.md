@@ -17,7 +17,7 @@ This config targets **Neovim 0.12+** and uses a hybrid plugin management approac
 `nvim/init.lua` loads five modules in order: `env` → `options` → `keymaps` → `misc` → `plugins`.
 
 **`lua/user/`**
-- `env.lua` — reads `~/.config/nvim/.env` (gitignored) and injects variables into `vim.env`. The `THEME` variable selects which colorscheme plugin to load.
+- `env.lua` — reads `~/.config/nvim/.env` (gitignored) and injects variables into `vim.env`. The `THEME` variable selects which colorscheme plugin to load. See `nvim/.env.example` for required variables.
 - `options.lua` — editor options (4-space tabs, relative numbers, no wrap, spell check, scrolloff=8)
 - `keymaps.lua` — global keymaps; leader is `<Space>`
 - `misc.lua` — autocommands (yank highlight)
