@@ -6,7 +6,7 @@ return {
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
-    'L3MON4D3/LuaSnip',         -- Ensure LuaSnip is installed by Packer
+    'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip', -- Plugin to make LuaSnip work with cmp
     'onsails/lspkind-nvim',     -- Glyph icons in the suggestion menu
   },
@@ -23,8 +23,6 @@ return {
       region_check_events = 'InsertEnter',
       delete_check_events = 'InsertLeave'
     })
-
-    require('luasnip/loaders/from_snipmate').lazy_load()
 
     -- Determine how cmp should behave it there is a character ahead of the cursor.
     local has_words_before = function()
@@ -43,8 +41,8 @@ return {
         format = require('lspkind').cmp_format(),
       },
       mapping = cmp.mapping.preset.insert {
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-d>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<CR>'] = cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Replace,

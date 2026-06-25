@@ -1,6 +1,6 @@
 return {
     'ellisonleao/gruvbox.nvim',
     config = function()
-        vim.cmd [[colorscheme gruvbox]]
+        vim.cmd("colorscheme " .. vim.env.COLORSCHEME)
     end
 }

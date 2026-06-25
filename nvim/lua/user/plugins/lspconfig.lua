@@ -134,7 +134,7 @@ return {
 
     vim.lsp.enable('tailwindcss')
 
-    vim.lsp.config('json_ls',{
+    vim.lsp.config('jsonls',{
       on_attach = on_attach,
       capabilities = capabilities,
       settings = {
@@ -144,7 +144,7 @@ return {
       },
     })
 
-    vim.lsp.enable('json_ls')
+    vim.lsp.enable('jsonls')
 
     vim.lsp.config('lua_ls',{
       on_attach = on_attach,
@@ -169,6 +169,13 @@ return {
     })
 
     vim.lsp.enable('emmet_language_server')
+
+    vim.lsp.config('ts_ls',{
+      on_attach = on_attach,
+      capabilities = capabilities,
+    })
+
+    vim.lsp.enable('ts_ls')
 
     -- PHP
     vim.lsp.config('intelephense',{

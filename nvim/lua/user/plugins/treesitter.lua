@@ -1,9 +1,7 @@
 return {
   'nvim-treesitter/nvim-treesitter',
-  event = 'VeryLazy',
-  build = function()
-    require('nvim-treesitter.install').update({ with_sync = true })
-  end,
+  lazy = false,
+  build = ":TSUpdate",
   dependencies = {
     { 'nvim-treesitter/playground', cmd = "TSPlaygroundToggle" },
     --{ 'JoosepAlviste/nvim-ts-context-commentstring' },

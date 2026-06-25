@@ -2,7 +2,6 @@ return {
   'nvim-lualine/lualine.nvim',
   lazy = false,
   dependencies = {
-    'arkav/lualine-lsp-progress',
     'nvim-tree/nvim-web-devicons',
   },
   opts = {
@@ -29,7 +28,7 @@ return {
           symbols = { added = ' ', modified = ' ', removed = ' ' },
         },
         function ()
-          return '󰅭 ' .. vim.pesc(tostring(#vim.tbl_keys(vim.lsp.get_clients())) or '')
+          return '󰅭 ' .. tostring(#vim.tbl_keys(vim.lsp.get_clients()))
         end,
         { 'diagnostics', sources = { 'nvim_diagnostic' } },
       },
