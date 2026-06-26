@@ -14,4 +14,5 @@ end
 
 load_env_file(vim.fn.expand("~/.config/nvim/.env"))
 
-
+vim.env.THEME = vim.env.THEME or 'catppuccin'
+vim.env.COLORSCHEME = vim.env.COLORSCHEME or 'catppuccin-mocha'
