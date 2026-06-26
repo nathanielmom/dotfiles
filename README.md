@@ -20,13 +20,11 @@ Requires **Neovim 0.12+**.
 
 ### Theme setup
 
-Copy the env example and set your theme:
+If no `.env` file exists, Neovim defaults to `catppuccin`/`catppuccin-mocha`. To override, copy the example and edit it:
 
 ```bash
 cp ~/.dotfiles/nvim/.env.example ~/.config/nvim/.env
 ```
-
-Edit `.env`:
 
 ```sh
 THEME=catppuccin          # matches a file in lua/user/plugins/<THEME>.lua
